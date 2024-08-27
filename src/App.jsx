@@ -3,7 +3,7 @@ import "./App.css";
 import axios from "axios";
 import Header from "./Header";
 import Categories from "./Categories";
-import Cart from "./assets/Cart";
+import Cart from "./Cart";
 
 function App() {
   const [data, setData] = useState({});
@@ -26,12 +26,6 @@ function App() {
     }
   }, []);
 
-  const newItems = (event) => {
-    event.preventDefault();
-    const itemsCopy = [...items];
-    setItems(itemsCopy);
-  };
-
   return isLoading ? (
     <div className="loading">
       <span>En cours de chargement... </span>
@@ -47,13 +41,11 @@ function App() {
         <div className="main-container">
           <div className="col-left">
             {data.categories.map((elem, index) => {
-              return (
-                <Categories category={elem} key={index} newItems={newItems} />
-              );
+              return <Categories category={elem} key={index} />;
             })}
           </div>
           <div className="col-right">
-            <Cart />
+            <Cart items={items} setItems={setItems} />
           </div>
         </div>
       </main>

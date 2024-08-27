@@ -1,5 +1,5 @@
 import { IoStar } from "react-icons/io5";
-const Categories = ({ category, newItems }) => {
+const Categories = ({ category, items, setItems }) => {
   return (
     <>
       {category.meals.length > 0 && (
@@ -12,8 +12,11 @@ const Categories = ({ category, newItems }) => {
                 <div
                   className="meal-card"
                   key={elem.id}
-                  onClick={(elem) => {
-                    newItems(elem.title);
+                  onClick={(event) => {
+                    event.preventDefault();
+                    const itemsCopy = [...items];
+                    itemsCopy.push(elem.title);
+                    setItems(itemsCopy);
                   }}
                 >
                   <div className="meal-infos">
